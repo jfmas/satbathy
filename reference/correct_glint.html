@@ -98,7 +98,10 @@ regression. Defaults to <code>500</code>.</p></dd>
 
 <dt id="arg-prob">prob<a class="anchor" aria-label="anchor" href="#arg-prob"></a></dt>
 <dd><p>Lower quantile of NIR over deep water used to estimate the
-glint-free NIR reflectance (<code>min_NIR</code>). Defaults to <code>0.01</code>.</p></dd>
+glint-free NIR reflectance (<code>min_NIR</code>). Hedley et al. (2005) use the
+<em>minimum</em> NIR value found in the sample; a small quantile (default
+<code>0.01</code>) is used here as a robust estimate. Set <code>prob = 0</code> for the literal
+minimum.</p></dd>
 
 </dl></div>
     <div class="section level2">

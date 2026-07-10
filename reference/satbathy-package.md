@@ -16,6 +16,8 @@ Useful links:
 
 - <https://github.com/jfmas/satbathy>
 
+- <https://jfmas.github.io/satbathy/>
+
 - Report bugs at <https://github.com/jfmas/satbathy/issues>
 
 ## Author

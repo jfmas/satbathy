@@ -33,8 +33,11 @@ log_ratio(x, blue = "blue", green = "green", n = 10000, trim = c(0.01, 0.99))
 
 - n:
 
-  Fixed positive constant applied inside the logarithms. Defaults to
-  `10000`.
+  Fixed positive constant applied inside the logarithms, chosen so both
+  logarithms stay positive. Defaults to `10000`. Stumpf et al. (2003)
+  report the ratio to be insensitive to `n` (root-mean-square error
+  changing by less than 0.4 m for `n` between 500 and 1500), as it only
+  rescales the ratio, which is absorbed by the calibration coefficients.
 
 - trim:
 

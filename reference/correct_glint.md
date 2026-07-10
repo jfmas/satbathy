@@ -53,7 +53,10 @@ correct_glint(
 - prob:
 
   Lower quantile of NIR over deep water used to estimate the glint-free
-  NIR reflectance (`min_NIR`). Defaults to `0.01`.
+  NIR reflectance (`min_NIR`). Hedley et al. (2005) use the *minimum*
+  NIR value found in the sample; a small quantile (default `0.01`) is
+  used here as a robust estimate. Set `prob = 0` for the literal
+  minimum.
 
 ## Value
 

@@ -80,8 +80,11 @@ high-penetration (blue) and lower-penetration (green) bands.</p></dd>
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>Fixed positive constant applied inside the logarithms. Defaults to
-<code>10000</code>.</p></dd>
+<dd><p>Fixed positive constant applied inside the logarithms, chosen so
+both logarithms stay positive. Defaults to <code>10000</code>. Stumpf et al. (2003)
+report the ratio to be insensitive to <code>n</code> (root-mean-square error changing
+by less than 0.4 m for <code>n</code> between 500 and 1500), as it only rescales the
+ratio, which is absorbed by the calibration coefficients.</p></dd>
 
 
 <dt id="arg-trim">trim<a class="anchor" aria-label="anchor" href="#arg-trim"></a></dt>
