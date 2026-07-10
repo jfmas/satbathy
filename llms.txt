@@ -1,0 +1,134 @@
+# satbathy
+
+**satbathy** derives bathymetry (water depth) in shallow, low-turbidity
+coastal waters from multispectral satellite imagery — such as Landsat
+8/9, Sentinel-2 and PlanetScope/SuperDove — using the empirical
+log-ratio transform of [Stumpf, Holderied and Sinclair
+(2003)](https://doi.org/10.4319/lo.2003.48.1_part_2.0547).
+
+The package covers the full empirical workflow: turbidity indexing to
+select clear-water dates, water masking, sun-glint correction, spatial
+filtering, the log-ratio transform, linear model calibration and
+prediction, iterative estimation of the maximum reliable depth, and
+accuracy assessment.
+
+## Installation
+
+Install the development version from GitHub:
+
+``` r
+# install.packages("pak")
+pak::pak("jfmas/satbathy")
+```
+
+## Quick start
+
+``` r
+library(satbathy)
+library(terra)
+
+# Bundled Mahahual (Mexican Caribbean) example
+img <- rast(system.file("extdata", "example_sr.tif",  package = "satbathy"))
+pts <- vect(system.file("extdata", "example_points.gpkg", package = "satbathy"))
+
+# 1. Mask land/clouds, keep water only
+img <- mask(img, water_mask(img), maskvalues = c(FALSE, NA))
+
+# 2. Log-ratio transform (Stumpf et al. 2003)
+ratio <- log_ratio(img, blue = "blue", green = "green")
+
+# 3. Calibrate against in situ depths
+tab <- extract_ratio(ratio, pts, depth_field = "depth")
+
+# 4. Find the maximum depth the signal resolves, then fit
+md  <- optimal_max_depth(tab)
+fit <- fit_bathymetry(tab, max_depth = md$max_depth[which.max(md$r2)])
+fit
+#> <satbathy_model>
+#>   depth = ... + ... * ratio
+
+# 5. Predict a depth map and assess accuracy
+depth_map <- predict_bathymetry(fit, ratio)
+evaluate_bathymetry(fit, tab)
+```
+
+## Method
+
+The log-ratio transform linearises the reflectance–depth relationship as
+
+    R = ln(n * R_blue) / ln(n * R_green)
+
+which is then related to depth by a simple linear model
+`Z = m1 * R - m0` calibrated with in situ soundings. Because the more
+strongly attenuated band saturates first, the ratio only tracks depth up
+to a penetration limit;
+[`optimal_max_depth()`](https://jfmas.github.io/satbathy/reference/optimal_max_depth.md)
+locates that limit so the model is fitted over its valid range.
+
+## Citation
+
+If you use **satbathy**, please cite Stumpf et al. (2003) for the
+underlying method, and:
+
+> Mas JF, Pérez Vega A. Empirical bathymetry with satellite images.
+
+## License
+
+MIT © Jean François Mas and Azucena Pérez Vega.
+
+# Package index
+
+## Image preprocessing
+
+Prepare surface-reflectance imagery before the ratio transform.
+
+- [`turbidity_index()`](https://jfmas.github.io/satbathy/reference/turbidity_index.md)
+  : Turbidity index (Frohn and Autrey 2009)
+- [`ndwi()`](https://jfmas.github.io/satbathy/reference/ndwi.md) :
+  Normalized Difference Water Index (NDWI)
+- [`water_mask()`](https://jfmas.github.io/satbathy/reference/water_mask.md)
+  : Water mask from NDWI
+- [`correct_glint()`](https://jfmas.github.io/satbathy/reference/correct_glint.md)
+  : Sun-glint correction (Hedley et al. 2005)
+- [`lowpass_filter()`](https://jfmas.github.io/satbathy/reference/lowpass_filter.md)
+  : Low-pass spatial filter
+
+## Ratio transform and modelling
+
+The empirical log-ratio transform, calibration and prediction.
+
+- [`log_ratio()`](https://jfmas.github.io/satbathy/reference/log_ratio.md)
+  : Log-ratio transform (Stumpf et al. 2003)
+- [`extract_ratio()`](https://jfmas.github.io/satbathy/reference/extract_ratio.md)
+  : Extract ratio values at in situ depth points
+- [`fit_bathymetry()`](https://jfmas.github.io/satbathy/reference/fit_bathymetry.md)
+  : Fit an empirical bathymetry model
+- [`predict_bathymetry()`](https://jfmas.github.io/satbathy/reference/predict_bathymetry.md)
+  : Predict depth from a ratio raster or table
+- [`optimal_max_depth()`](https://jfmas.github.io/satbathy/reference/optimal_max_depth.md)
+  : Estimate the maximum reliable depth
+
+## Accuracy assessment
+
+- [`rmse()`](https://jfmas.github.io/satbathy/reference/accuracy.md)
+  [`mae()`](https://jfmas.github.io/satbathy/reference/accuracy.md) :
+  Accuracy metrics for depth predictions
+- [`evaluate_bathymetry()`](https://jfmas.github.io/satbathy/reference/evaluate_bathymetry.md)
+  : Evaluate a bathymetry model against independent data
+
+## Model methods
+
+- [`print(`*`<satbathy_model>`*`)`](https://jfmas.github.io/satbathy/reference/satbathy_model-methods.md)
+  [`summary(`*`<satbathy_model>`*`)`](https://jfmas.github.io/satbathy/reference/satbathy_model-methods.md)
+  [`predict(`*`<satbathy_model>`*`)`](https://jfmas.github.io/satbathy/reference/satbathy_model-methods.md)
+  [`plot(`*`<satbathy_model>`*`)`](https://jfmas.github.io/satbathy/reference/satbathy_model-methods.md)
+  :
+
+  Methods for `satbathy_model` objects
+
+# Articles
+
+### All vignettes
+
+- [Getting started with
+  satbathy](https://jfmas.github.io/satbathy/articles/satbathy.md):
