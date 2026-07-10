@@ -17,6 +17,7 @@ accuracy assessment.
 Install the development version from GitHub:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("jfmas/satbathy")
 ```
@@ -24,6 +25,7 @@ pak::pak("jfmas/satbathy")
 ## Quick start
 
 ``` r
+
 library(satbathy)
 library(terra)
 

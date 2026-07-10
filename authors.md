@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/jfmas/satbathy/blob/HEAD/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/jfmas/satbathy/blob/main/DESCRIPTION)
 
 Mas J, Pérez Vega A (2026). *satbathy: Satellite-Derived Bathymetry with
 the Empirical Ratio Transform*. R package version 0.0.0.9000,

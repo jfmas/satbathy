@@ -16,6 +16,7 @@ dataset, a Landsat scene with in situ bathymetry from Mahahual, on the
 Mexican Caribbean coast.
 
 ``` r
+
 library(satbathy)
 library(terra)
 
@@ -49,6 +50,7 @@ lower values mean clearer water. Here we simply summarise it for the
 single example scene.
 
 ``` r
+
 turb <- turbidity_index(img)
 global(turb, "mean", na.rm = TRUE)
 #>                mean
@@ -66,6 +68,7 @@ not available, a threshold on the Normalized Difference Water Index
 works well:
 
 ``` r
+
 wm <- water_mask(img, green = "green", nir = "nir", threshold = 0)
 img_water <- mask(img, wm, maskvalues = c(FALSE, NA))
 ```
@@ -96,6 +99,7 @@ then reduces residual speckle. Both steps are optional and, in very
 calm, uniform waters, make little difference.
 
 ``` r
+
 img_gc <- correct_glint(img_water, vis_bands = c("blue", "green"),
                         nir_band = "nir", deep_mask = deep)
 img_gc <- lowpass_filter(img_gc)
@@ -104,6 +108,7 @@ img_gc <- lowpass_filter(img_gc)
 ## 4. The log-ratio transform
 
 ``` r
+
 ratio <- log_ratio(img_gc, blue = "blue", green = "green", n = 10000)
 plot(ratio, main = "Log-ratio (blue/green)")
 ```
@@ -123,6 +128,7 @@ goodness of fit rises as the linear range fills in and then drops once
 saturated (too-deep) points are included.
 
 ``` r
+
 tab <- extract_ratio(ratio, pts, depth_field = "depth")
 
 md <- optimal_max_depth(tab)
@@ -134,6 +140,7 @@ plot(md$max_depth, md$r2, type = "b",
 
 ``` r
 
+
 best <- md$max_depth[which.max(md$r2)]
 best
 #> [1] -31
@@ -143,6 +150,7 @@ The scatter makes the saturation explicit: beyond the penetration limit
 the ratio no longer increases with depth.
 
 ``` r
+
 plot(tab$ratio, tab$depth, pch = 20, col = "grey50",
      xlab = "Ratio", ylab = "Depth (m)")
 abline(h = best, lty = 2)
@@ -153,6 +161,7 @@ abline(h = best, lty = 2)
 Now fit the model over its valid range and inspect it:
 
 ``` r
+
 fit <- fit_bathymetry(tab, max_depth = best)
 fit
 #> <satbathy_model>
@@ -169,6 +178,7 @@ plot(fit)
 Apply the calibrated model to the ratio raster to obtain a depth map:
 
 ``` r
+
 depth_map <- predict_bathymetry(fit, ratio)
 plot(depth_map, main = "Satellite-derived bathymetry (m)")
 ```
@@ -180,6 +190,7 @@ valid depth range and score them with
 [`evaluate_bathymetry()`](https://jfmas.github.io/satbathy/reference/evaluate_bathymetry.md):
 
 ``` r
+
 valid <- tab[tab$depth > best, ]
 set.seed(1)
 i <- sample(nrow(valid), round(0.7 * nrow(valid)))
