@@ -1,0 +1,18 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+# Package build artifacts
+*.tar.gz
+*.Rcheck/
+/docs/
+/doc/
+/Meta/
+inst/doc/
+
+# OS / editor
+.DS_Store
+*~
