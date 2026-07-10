@@ -12,6 +12,7 @@ Tools to estimate water depth in shallow, low-turbidity coastal waters from mult
 Useful links:
 \itemize{
   \item \url{https://github.com/jfmas/satbathy}
+  \item \url{https://jfmas.github.io/satbathy/}
   \item Report bugs at \url{https://github.com/jfmas/satbathy/issues}
 }
 

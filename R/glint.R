@@ -18,7 +18,10 @@
 #' @param n_sample Number of random deep-water pixels used to fit each
 #'   regression. Defaults to `500`.
 #' @param prob Lower quantile of NIR over deep water used to estimate the
-#'   glint-free NIR reflectance (`min_NIR`). Defaults to `0.01`.
+#'   glint-free NIR reflectance (`min_NIR`). Hedley et al. (2005) use the
+#'   *minimum* NIR value found in the sample; a small quantile (default
+#'   `0.01`) is used here as a robust estimate. Set `prob = 0` for the literal
+#'   minimum.
 #'
 #' @return A copy of `x` in which the layers named in `vis_bands` have been
 #'   glint-corrected. If the deep-water sample is too small to fit the

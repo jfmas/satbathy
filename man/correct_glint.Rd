@@ -29,7 +29,10 @@ the CRS of \code{x} if necessary.}
 regression. Defaults to \code{500}.}
 
 \item{prob}{Lower quantile of NIR over deep water used to estimate the
-glint-free NIR reflectance (\code{min_NIR}). Defaults to \code{0.01}.}
+glint-free NIR reflectance (\code{min_NIR}). Hedley et al. (2005) use the
+\emph{minimum} NIR value found in the sample; a small quantile (default
+\code{0.01}) is used here as a robust estimate. Set \code{prob = 0} for the literal
+minimum.}
 }
 \value{
 A copy of \code{x} in which the layers named in \code{vis_bands} have been
