@@ -24,6 +24,7 @@ RoxygenNote: 8.0.0
 Depends:
     R (>= 4.1)
 Imports:
+    graphics,
     stats,
     terra
 Suggests:
