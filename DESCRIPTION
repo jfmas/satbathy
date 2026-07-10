@@ -15,10 +15,18 @@ Description: Tools to estimate water depth in shallow, low-turbidity
     of the maximum reliable depth, turbidity indexing for image selection,
     and accuracy assessment.
 License: MIT + file LICENSE
+URL: https://github.com/jfmas/satbathy
+BugReports: https://github.com/jfmas/satbathy/issues
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
-Suggests: 
+Depends:
+    R (>= 4.1)
+Imports:
+    stats,
+    terra
+Suggests:
+    sf,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
