@@ -1,0 +1,30 @@
+url: https://jfmas.github.io/satbathy/
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Image preprocessing
+  desc: Prepare surface-reflectance imagery before the ratio transform.
+  contents:
+  - turbidity_index
+  - ndwi
+  - water_mask
+  - correct_glint
+  - lowpass_filter
+- title: Ratio transform and modelling
+  desc: The empirical log-ratio transform, calibration and prediction.
+  contents:
+  - log_ratio
+  - extract_ratio
+  - fit_bathymetry
+  - predict_bathymetry
+  - optimal_max_depth
+- title: Accuracy assessment
+  contents:
+  - rmse
+  - mae
+  - evaluate_bathymetry
+- title: Model methods
+  contents:
+  - satbathy_model-methods
