@@ -27,5 +27,8 @@
   - [`rmse()`](https://jfmas.github.io/satbathy/reference/accuracy.md) /
     [`mae()`](https://jfmas.github.io/satbathy/reference/accuracy.md) —
     accuracy metrics.
+  - [`interpolate_sea_level()`](https://jfmas.github.io/satbathy/reference/interpolate_sea_level.md)
+    — tide-gauge sea-level interpolation to normalise in situ soundings
+    to a common datum.
 - Bundled Mahahual (Mexican Caribbean) example dataset in
   `inst/extdata`.

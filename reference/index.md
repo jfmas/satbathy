@@ -15,6 +15,13 @@ Prepare surface-reflectance imagery before the ratio transform.
 - [`lowpass_filter()`](https://jfmas.github.io/satbathy/reference/lowpass_filter.md)
   : Low-pass spatial filter
 
+## In situ data preparation
+
+Prepare the field soundings used to calibrate the model.
+
+- [`interpolate_sea_level()`](https://jfmas.github.io/satbathy/reference/interpolate_sea_level.md)
+  : Interpolate tide-gauge sea level at arbitrary times
+
 ## Ratio transform and modelling
 
 The empirical log-ratio transform, calibration and prediction.
