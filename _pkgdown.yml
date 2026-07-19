@@ -12,6 +12,10 @@ reference:
   - water_mask
   - correct_glint
   - lowpass_filter
+- title: In situ data preparation
+  desc: Prepare the field soundings used to calibrate the model.
+  contents:
+  - interpolate_sea_level
 - title: Ratio transform and modelling
   desc: The empirical log-ratio transform, calibration and prediction.
   contents:

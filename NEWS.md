@@ -13,4 +13,6 @@
   - `optimal_max_depth()` — iterative estimation of the maximum reliable
     depth (signal-saturation analysis).
   - `rmse()` / `mae()` — accuracy metrics.
+  - `interpolate_sea_level()` — tide-gauge sea-level interpolation to
+    normalise in situ soundings to a common datum.
 * Bundled Mahahual (Mexican Caribbean) example dataset in `inst/extdata`.
